@@ -9,15 +9,17 @@ import pandas as pd
 from math import sqrt
 
 
-# creating Ml class
+# creating Ml classf
 class Ml:
     def __init__(self,name,height,weight):
         self.name = name
         self.height = height
         self.weight = weight
     def __eucli(self):#return the euclidien distance of each elements from the given as a dataframe
-        self.data['eucli'] =(sqrt((self.height-self.data['height'])**2+(self.weight-self.data['weight'])**2)).astype(float)
+        self.data['eucli']=self.data['eucli'].astype(float)
         print(self.data)
+        #self.data['eucli'] =sqrt((self.height-self.data['height'])**2+(self.weight-self.data['weight'])**2).astype(float)
+       # print(self.data)
     
     def __select_k(self):# return the k neighbour
         pass

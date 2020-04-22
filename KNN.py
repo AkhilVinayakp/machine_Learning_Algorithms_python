@@ -47,7 +47,7 @@ class Ml:
         print(self.data)
         self.__eucli()
         pr_class = self.__select_k()
-        print("predicted class of {} with height {} and {} weight is {}".format(self.name, self.height, self.weight,pr_class))
+        print("\n\n predicted class of {} with height {} and {} weight is {}".format(self.name, self.height, self.weight,pr_class))
         
         
         
@@ -57,7 +57,7 @@ def initial():
     try:
         ml = Ml()
         ml.add_data()
-        ml.run(3)
+        ml.run(5)
     except Exception as e:
         print(e)
 

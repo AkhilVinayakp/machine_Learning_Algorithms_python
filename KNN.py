@@ -7,6 +7,7 @@ Created on Mon Apr  6 11:55:35 2020
 """
 import pandas as pd
 import numpy as np
+from statistics import mode
 #from math import sqrt do not use math.sqrt cause error  can not convert the series to class float
 
 
@@ -30,17 +31,24 @@ class Ml:
         #print(self.data)
     
     def __select_k(self):# return the k neighbour
-        pass
+        self.data.sort_values(by=['eucli'], inplace = True)
+        print(self.data)
+        srt = self.data.head(self.k)
+        return self.__ret_class(srt)
     #fn that calculate the class of given data
-    def __ret_class(self):
-        pass
+    def __ret_class(self,srt):
+        print(srt)
+        k_list = list(srt['t shirt size'])
+        return mode(k_list)
     #fn run will bw called from outside
     def run(self,k):
         self.k = k # amount of neightbour selection
         self.data = pd.DataFrame(pd.read_csv("data.csv"))
-       # print(self.data)
-        self.__eucli()
         print(self.data)
+        self.__eucli()
+        pr_class = self.__select_k()
+        print("predicted class of {} with height {} and {} weight is {}".format(self.name, self.height, self.weight,pr_class))
+        
         
         
     

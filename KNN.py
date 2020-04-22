@@ -11,10 +11,17 @@ from math import sqrt
 
 # creating Ml classf
 class Ml:
-    def __init__(self,name,height,weight):
-        self.name = name
-        self.height = height
-        self.weight = weight
+    def __init__(self):
+        pass
+    def add_data(self):
+        try:
+            self.name = input('Enter the name')
+            self.height = int(input('enter the height'))
+            self.weight = int(input('enter the weight'))
+        except (IOError, TypeError, KeyboardInterrupt) as e:
+            print(e)
+        except Exception as e:
+            print(e)
     def __eucli(self):#return the euclidien distance of each elements from the given as a dataframe
         self.data['eucli']=self.data['eucli'].astype(float)
         print(self.data)
@@ -38,15 +45,12 @@ class Ml:
     
 
 def initial():
-    name = input('Enter the name')
-    height = int(input('enter the height'))
-    weight = int(input('enter the weight'))
     try:
-        ml = Ml(name,height,weight)
+        ml = Ml()
+        ml.add_data()
         ml.run(3)
     except Exception as e:
         print(e)
-
 
 initial()
         

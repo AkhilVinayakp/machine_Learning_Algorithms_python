@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 #from sklearn.preprocessing import Imputer  >>>deprecation 
 from sklearn.impute import SimpleImputer
-
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 
 
 
@@ -38,6 +38,16 @@ class Preprocess:
         self.imputer=self.imputer.fit(self.x[self.nan_col])
         self.x[self.nan_col] = self.imputer.transform(self.x[self.nan_col])
         
+        
+    #catogorical data encoding 
+    def env_cat_lab(self,index):
+        labelx = LabelEncoder()
+        self.x[:,index]=labelx.fit_transform(self.x[:,index])
+    
+    def enc_cat_mr(self,index):
+        onehotencoder = OneHotEncoder(categorical_features=index)
+        self.x = onehotencoder.fit_transform(self.x)
+        
     @property
     def pdf(self):
         return self.data
@@ -58,6 +68,7 @@ print(pre.check_nan())
 
 # applying preprocessing
 pre.preprocess()
+pre.enc_cat_mr(0)
 print(pre.features)
 
 

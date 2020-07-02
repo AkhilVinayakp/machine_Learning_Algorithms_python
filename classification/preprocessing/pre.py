@@ -37,18 +37,11 @@ class Preprocess:
         self.imputer  = SimpleImputer()
         self.imputer=self.imputer.fit(self.x[self.nan_col])
         self.x[self.nan_col] = self.imputer.transform(self.x[self.nan_col])
-        # for adusting the types > remove req
-        self.x.astype({self.nan_col[0]:'int64'},{self.nan_col[1]:'int64'}).dtypes
-        
         
     @property
     def pdf(self):
         return self.data
         
-
-
-
-
 
 
 # loading the data

@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-#from sklearn.preprocessing import Imputer
+#from sklearn.preprocessing import Imputer  >>>deprecation 
 from sklearn.impute import SimpleImputer
 
 
@@ -35,8 +35,10 @@ class Preprocess:
     # preprocess the data
     def preprocess(self):
         self.imputer  = SimpleImputer()
-        
-        
+        self.imputer=self.imputer.fit(self.x[self.nan_col])
+        self.x[self.nan_col] = self.imputer.transform(self.x[self.nan_col])
+        # for adusting the types > remove req
+        self.x.astype({self.nan_col[0]:'int64'},{self.nan_col[1]:'int64'}).dtypes
         
         
     @property
@@ -60,6 +62,10 @@ pre.labels = data.iloc[:,3]
 #print(pre.features, pre.labels)
 
 print(pre.check_nan())
+
+# applying preprocessing
+pre.preprocess()
+print(pre.features)
 
 
 

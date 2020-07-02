@@ -23,6 +23,7 @@ class Preprocess:
     @labels.setter
     def labels(self,y):
         self.y = y
+    # check 
     # preprocess the data
     def preprocess(self):
         self.imputer  = SimpleImputer()
@@ -43,8 +44,8 @@ pre = Preprocess(data)
 
 print(pre.pdf)
 
-pre.features = data.iloc[:,:-1].values
-pre.labels = data.iloc[:,3].values
+pre.features = data.iloc[:,:-1]
+pre.labels = data.iloc[:,3]
 print(pre.features, pre.labels)
 
 

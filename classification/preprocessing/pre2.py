@@ -30,10 +30,18 @@ class Preprocess:
         return self.nan_col
     def clean_nan(self):
         imputer = SimpleImputer()# leaving with default
-        
-
-
+        if len(self.nan_col) == 0:
+            return 0
+        self.data[self.nan_col] = imputer.fit_transform(self.data[self.nan_col])
+    
+    def enc_cat_data(self,index = 0):
+        label = LabelEncoder()
+        self.data.iloc[:,index] = label.fit_transform(self.data.iloc[:,index])
 
 data = Preprocess("Data.csv")
 print(data.frm)
 print(data.check_nan)
+data.clean_nan()
+data.enc_cat_data()
+print(data.frm)
+

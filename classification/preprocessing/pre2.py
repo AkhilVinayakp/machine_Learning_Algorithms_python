@@ -37,11 +37,27 @@ class Preprocess:
     def enc_cat_data(self,index = 0):
         label = LabelEncoder()
         self.data.iloc[:,index] = label.fit_transform(self.data.iloc[:,index])
+    def enc_cat_hot(self,index=0):
+        onehot = OneHotEncoder(categorical_features=[0])
+        self.data = onehot.fit_transform(self.data)
+    def cl_transform(self,li):
+        transformer =  ColumnTransformer(transformers=li, remainder="passthrough")
+        self.data = pd.DataFrame(transformer.fit_transform(self.data))
+        #print(transformer.get_params())
+        
+    
 
 data = Preprocess("Data.csv")
 print(data.frm)
 print(data.check_nan)
 data.clean_nan()
-data.enc_cat_data()
+print(data.frm)
+#data.enc_cat_data()
+#data.enc_cat_hot()
+
+# defining the list of transforms 
+t = [('one',OneHotEncoder(),[0])]
+data.cl_transform(t)
+
 print(data.frm)
 

@@ -31,10 +31,11 @@ sc_x = StandardScaler()
 x_train = sc_x.fit_transform(x_train)
 x_test = sc_x.fit_transform(x_test)
 
-
-
-
-
+# fitting the model with the sklearn.linearmodel.LogisticRegression
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(random_state = 0)
+classifier.fit(x_train,y_train)
+y_predicet = classifier.predict(x_test)
 
 
 

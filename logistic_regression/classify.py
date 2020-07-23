@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 
 
 data = pd.read_csv("Social_Network_Ads.csv")
-print(data)
+# print(data)
 '''
 the dataset contains the data collected of people who can buy a suv
 the prediction has take place by using two independent properties which is age and
@@ -38,7 +38,9 @@ classifier.fit(x_train,y_train)
 y_predicet = classifier.predict(x_test)
 
 
-
+# creating the confussion_matric for evaluating the prediction
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_test,y_predicet)
 
 
 

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/nirva/Documents/GitHub/machine_Learning_Algorithms_python/TestBench/mlruns/0/8e74b12d361b4809b1bd1a3d6b9f1f8a/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8e74b12d361b4809b1bd1a3d6b9f1f8a
+run_name: powerful-snipe-282
+run_uuid: 8e74b12d361b4809b1bd1a3d6b9f1f8a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1688914003495
+status: 1
+tags: []
+user_id: nirva

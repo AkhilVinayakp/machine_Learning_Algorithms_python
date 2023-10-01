@@ -2,3 +2,5 @@
 *.csv
 *.xlsx
 ml_camp/audio.hdf5
+mlflow/venv
+Data_Analytics/Data

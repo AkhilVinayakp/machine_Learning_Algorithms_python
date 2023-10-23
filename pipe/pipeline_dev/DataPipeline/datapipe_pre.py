@@ -4,8 +4,10 @@
 import requests
 import io
 import os
+from hydra import compose, initialize
 import pandas as pd
 from prefect import flow, task
+
 
 @task(retries=3, retry_delay_seconds=5)
 def gather_data(url:str)->pd.DataFrame:
@@ -49,17 +51,17 @@ def load_data(data:pd.DataFrame):
     return
 
 @flow(name="Data Pipeline", log_prints=True)
-def data_loading(input_url:str):
+def data_loading(cfg_datapipe={}):
     """
     load the preprocessed data into the directory.
     """
-    raw_data = gather_data(url=input_url)
+    if not cfg_datapipe:
+        initialize(config_path="conf", version_base=None)
+        cfg = compose(config_name="staging")
+        cfg_datapipe = cfg.datapipe
+    raw_data = gather_data(url=cfg_datapipe.get('url'))
     transformed_data = transform_data(raw_data)
     load_data(transformed_data)
 
-
 if __name__ == "__main__":
-    url = "https://gist.githubusercontent.com/tijptjik/9408623/raw/b237fa5848349a14a14e5d4107dc7897c21951f5/wine.csv"
-    # my_flow = data_loading(input_url=url)
-    # print(my_flow)
-    
+    data_loading()

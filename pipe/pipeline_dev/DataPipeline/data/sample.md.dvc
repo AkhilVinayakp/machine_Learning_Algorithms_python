@@ -1,0 +1,5 @@
+outs:
+- md5: 65bcafa52f9d4ae1b8a882a9916a64c1
+  size: 15
+  hash: md5
+  path: sample.md

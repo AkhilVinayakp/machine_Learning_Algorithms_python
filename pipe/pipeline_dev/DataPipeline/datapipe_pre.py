@@ -7,6 +7,7 @@ import os
 from hydra import compose, initialize
 import pandas as pd
 from prefect import flow, task
+from sklearn.model_selection import train_test_split
 
 
 @task(retries=3, retry_delay_seconds=5)
@@ -47,6 +48,39 @@ def load_data(data:pd.DataFrame):
     print("data loaded to destination")
     print("working dir :", os.getcwd())
     print("data available:", data.shape)
+    features = data.iloc[:,:-1]
+    labels = data.iloc[:,-1]
+    # splitting the data
+    x_train, x_test, y_train, y_test = train_test_split(features, labels, test_size=0.2)
+    # random state avoided for the purpose to get different dataset.
+    # for testing with dvc
+    x_train, x_test, val_train, val_test = train_test_split(x_train, y_train, test_size=0.1)
+    # random state not considers for dvc testing.
+    # test : 20% train:70% validation:10%
+    
+    # TODO
+    # * add following to config
+    train_path = "data/train"
+    test_path = "data/test"
+    val_path = "data/val"
+    # generating those paths and files
+    rpaths=[train_path, test_path, val_path]
+    try:
+        for rpath in rpaths:
+            full_path = os.path.join(os.getcwd(), rpath)
+            if not os.path.exists(full_path):
+                # creating:
+                os.makedirs(full_path)
+                print("created path ", full_path)
+    except Exception:
+        print("path can not be created/accessible.")
+        raise Exception("end point path creation failed")
+    # writing the files to the path
+    # TODO
+    
+
+
+
     print(data.to_csv("wine.csv", index=False))
     return
 

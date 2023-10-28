@@ -30,5 +30,43 @@ for path in paths:
     if not os.path.exists(full_path):
         print('path not exists, creating')
         os.makedirs(full_path)
+    if "train" in path:
+        x_train.to_csv(os.path.join(full_path, "x_train.csv"),index=False)
+        y_train.to_csv(os.path.join(full_path, "y_train.csv"),index=False)
+    elif "test" in path:
+        x_test.to_csv(os.path.join(full_path, "x_test.csv"),index=False)
+        y_test.to_csv(os.path.join(full_path, "y_test.csv"),index=False)
+    elif "valid" in path:
+        x_valid.to_csv(os.path.join(full_path, "x_valid.csv"),index=False)
+        y_valid.to_csv(os.path.join(full_path, "y_valid.csv"),index=False)
+
+# %%
+# adding everything to dvc as well
+import subprocess
+
+# going to the directory where dvc is initialized
+os.chdir("data/") # current one is DVC_lr and dvc init in DVC_lr/data
+items = [
+    'train/x_train.csv',
+    'train/y_train.csv',
+    'test/x_test.csv',
+    'test/y_test.csv',
+    'valid/x_valid.csv',
+    'valid/y_valid.csv'
+]
+for item in items:
+    cmd = f"dvc add {item}"
+    try:
+        result = subprocess.run(cmd, shell=True, check=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        if result.returncode == 0:
+            print(f"Data versioned for item {item}")
+        else:
+            print(f"Error in adding to DVC : {result.stderr}")
+    except subprocess.CalledProcessError as e:
+        print(f"Error {e.returncode}\n {e.stderr}")
+    except Exception as e:
+        print(f"Error in processing {str(e)}")
+
+
 
 # %%

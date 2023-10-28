@@ -70,3 +70,23 @@ for item in items:
 
 
 # %%
+from datetime import datetime
+time_component = datetime.today().__str__().split()[0]
+
+# %%
+import yaml
+items = [
+    'train/x_train.csv.dvc',
+    'train/y_train.csv.dvc',
+    'test/x_test.csv.dvc',
+    'test/y_test.csv.dvc',
+    'valid/x_valid.csv.dvc',
+    'valid/y_valid.csv.dvc'
+]
+with open("tag.md") as fp:
+    tag_data = fp.read()
+td = tag_data[1:].split(".")
+td[1] = int(td[1]) + 1 # for simplicity only updating the 
+td = f"V{'.'.join([str(i) for i in td])}"
+# %%
+commit_msg = f""

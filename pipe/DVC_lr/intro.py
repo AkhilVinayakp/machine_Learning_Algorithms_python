@@ -89,4 +89,22 @@ td = tag_data[1:].split(".")
 td[1] = int(td[1]) + 1 # for simplicity only updating the 
 td = f"V{'.'.join([str(i) for i in td])}"
 # %%
-commit_msg = f""
+commit_msg = f"{td}-{time_component}"
+# make sure inside the data folder
+try:
+    result = subprocess.run(["git", "add", *items], shell=True, check=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+    if result.returncode == 0:
+        result = subprocess.run(["git", "commit", "-m", commit_msg], shell=True, check=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        print("data versioned successfully.")
+except subprocess.CalledProcessError as e:
+    print(f"Error {e.returncode}\n {e.stderr}")
+except Exception as e:
+    print(f"Error in processing {str(e)}")
+
+# %%
+# update the file
+with open("tag.md","w") as fp:
+    fp.write(td)
+# %%
+# TODO
+# do a git push

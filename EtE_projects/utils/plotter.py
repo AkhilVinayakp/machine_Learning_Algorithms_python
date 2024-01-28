@@ -55,7 +55,7 @@ def plotTemporal_correlation(df:pd.DataFrame, col_name:str, return_info_table:bo
 def plot_field(df: pd.DataFrame, field_name:str):
     fig, axes = plt.subplots(1,2,figsize=(12, 5))
 
-    # plt.figure(figsize=(8,5)) 
+    # plt.figure(figsize=(8,5))
     # kde plot.
     sns.kdeplot(data=df,x=field_name, color='grey', ax=axes[0])
     axes[0].set_xlabel(f"field :{field_name}")

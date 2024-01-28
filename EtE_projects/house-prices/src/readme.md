@@ -1,20 +1,9 @@
 # Pipelines
 
-- Data Pipeline [future : currently using local data][prefect][pyspark]
+- Data Pipeline [future : currently using local data]
 - FE pipeline : [prefect pipeline]
-- ML pipeline : [Kubeflow]
+- ML pipeline : [prefect]
 
 
 ## configuration
 - Hydra
-
-
-
-# envirornment
-
-using pyspark on conda
-
-
-# running
-
-$ prefect server start

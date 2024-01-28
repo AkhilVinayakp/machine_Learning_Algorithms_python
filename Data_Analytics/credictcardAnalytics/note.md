@@ -7,8 +7,3 @@ Class
 unbalanced dataset.
 ## what is the approch when we have an unbalanced dataset ?
 - no data balancing will work.
-
-
-- univariate analysis
-- bivariate analysis 
-- correlation analysis

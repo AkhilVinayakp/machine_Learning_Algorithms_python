@@ -6,3 +6,6 @@ mlflow/venv
 Data_Analytics/Data
 *.zip
 .env
+.venv
+genAI/RAG/rag_app/chroma/
+genAI/RAG/rag_app/data/

@@ -58,3 +58,23 @@ class DataOps:
         The imputation are done based on  K
         """
         pass
+
+
+
+class Univariate:
+    def __init__(self) -> None:
+        pass
+
+    @staticmethod
+    def numeric_field_types(df:pd.DataFrame, count_threshold:int=20, ratio_threshold:int=0.1):
+        numeric_df = df.select_dtpyes(include("integer"))
+        discrete_cols = []
+        continuous_cols = []
+        for field in numeric_df.columns:
+            column = df[field]
+            unique_values = column.nunique()
+            unique_ratio = unique_values / len(column)
+            if unique_values <= count_threshold or unique_ratio < ratio_threshold:
+                discrete_cols.append(field)
+            else:
+                continuous_cols.append(field)

@@ -67,7 +67,7 @@ class Univariate:
 
     @staticmethod
     def numeric_field_types(df:pd.DataFrame, count_threshold:int=20, ratio_threshold:int=0.1):
-        numeric_df = df.select_dtpyes(include("integer"))
+        numeric_df = df.select_dtypes(include=["integer"])
         discrete_cols = []
         continuous_cols = []
         for field in numeric_df.columns:
@@ -78,3 +78,6 @@ class Univariate:
                 discrete_cols.append(field)
             else:
                 continuous_cols.append(field)
+        return continuous_cols, discrete_cols
+    
+

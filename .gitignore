@@ -9,3 +9,6 @@ Data_Analytics/Data
 .venv
 genAI/RAG/rag_app/chroma/
 genAI/RAG/rag_app/data/
+bootcamp/data
+bootcamp/notebooks/datasets
+*.pyc
